@@ -9,16 +9,16 @@ export default function UserContent({title,email,post,time,verified,country}) {
     console.log(country);
     return (
         <div className="userContent">
-            <img src="https://pbs.twimg.com/profile_images/1224193692933808130/ob8r0cv__400x400.jpg" alt="" />
+            <img className="avatar" src="https://pbs.twimg.com/profile_images/1224193692933808130/ob8r0cv__400x400.jpg" alt="" />
            
            <div className="userContent-title">
-               <ul>
+               <ul class="d-flex align-items-center">
                    <li><b>{title}</b></li>
                    {verified&&<li className="img-verify"><img src="https://png.pngtree.com/element_our/png/20181205/valid-vector-icon-png_260889.jpg" className="img-verify" alt="" /></li>}
                    <li>@{email}</li>
-                   {/* <li>{time?time:"No Time"} ago</li> */}
-                   <li><img src={`https://www.countryflags.io/${country}/flat/64.png`} /></li>
+                   <li><img className="countryImage" src={`https://www.countryflags.io/${country}/flat/32.png`} /></li>
                    <li>{postTime}</li>
+                   
                </ul>
                <p>{post}</p>
                <div className="social-media">

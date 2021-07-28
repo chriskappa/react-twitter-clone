@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .navBarWrapper {
@@ -14,18 +14,14 @@
 }
 ul,
 li {
-  display: flex;
-  justify-content: center;
   text-decoration: none;
   list-style: none;
+
   margin-right: 10px;
 }
 
 button {
   margin-right: 10px;
-}
-
-.all-content-wrapper {
 }
 
 .dashboard-wrapper {
@@ -70,7 +66,7 @@ button {
   margin-top: 50px;
 }
 
-.userContent img {
+.userContent .avatar {
   width: 70px;
   height: 70px;
   border-radius: 50px;
@@ -86,7 +82,7 @@ button {
 .userContent-title {
   padding: 20px;
 
-  text-align: left;
+  /* text-align: left; */
 
   width: 100vw;
 }
@@ -120,4 +116,11 @@ button {
 
 .post-input button {
   height: 72px;
+}
+
+.countryImage {
+  width: 35px;
+
+  /* object-fit: fill; */
+  border-radius: 20px;
 }
