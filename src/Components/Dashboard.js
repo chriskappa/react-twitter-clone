@@ -63,7 +63,7 @@ export default function Dashboard() {
                 if(!currentUser.emailVerified ){
                     alert("Please Verify your account to have the verify badge")
                 }
-                else if(title.length == 0 || description.length < 20 ){
+                else if(title.length == 0 || description.length == 0 ){
                     alert("Please make sure to include title and minimum of 20 characters for description")
                     setPosting(false);
                 }
@@ -76,7 +76,8 @@ export default function Dashboard() {
                         time:today.getTime(),
                         verified:currentUser.emailVerified,
                         country:localStorage.getItem('country'),
-                        avatar:`https://avatars.abstractapi.com/v1/?api_key=c0a5e53a8949487ca25697cf362b9025&name=${currentUser.email}%20` || 'https://static.wixstatic.com/media/a86808_4b6288c72b6845a98503af781a4f51a0~mv2.png/v1/crop/x_0,y_13,w_350,h_323/fill/w_490,h_452,al_c,lg_1,q_85/no%20profile%20picture.webp'
+                                // avatar:`https://avatars.abstractapi.com/v1/?api_key=c0a5e53a8949487ca25697cf362b9025&name=${currentUser.email}%20` || 'https://static.wixstatic.com/media/a86808_4b6288c72b6845a98503af781a4f51a0~mv2.png/v1/crop/x_0,y_13,w_350,h_323/fill/w_490,h_452,al_c,lg_1,q_85/no%20profile%20picture.webp'
+                        avatar:`https://avatars.dicebear.com/api/male/${currentUser.email}.svg?mood[]=sad` || 'https://static.wixstatic.com/media/a86808_4b6288c72b6845a98503af781a4f51a0~mv2.png/v1/crop/x_0,y_13,w_350,h_323/fill/w_490,h_452,al_c,lg_1,q_85/no%20profile%20picture.webp'
                     })
                 cleanInputs();
                 setTimeout(()=>{ setPosting(false); }, 1000);
@@ -149,9 +150,6 @@ export default function Dashboard() {
 
                     data &&data.map((d,i) => <UserContent key={i}title={d.title} country={d.country} avatar={d.avatar}verified={d.verified}email={d.email} post={d.description} time={d.time}/>)}
 
-                </div>
-                <div className="profile-wrapper mr-5">
-                    <UserProfile/>
                 </div>
             </div>
             

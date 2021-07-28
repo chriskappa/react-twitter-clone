@@ -18,6 +18,7 @@ export default function UserContent({title,email,post,time,verified,country,avat
                    {verified&&<li className="img-verify"><img src="https://png.pngtree.com/element_our/png/20181205/valid-vector-icon-png_260889.jpg" className="img-verify" alt="" /></li>}
                    <li>{email}</li>
                    <li><img className="countryImage" src={`https://www.countryflags.io/${country}/flat/32.png`} /></li>
+                   {/* <li><img className="countryImage" src={`https://www.countryflags.io/${country}/flat/32.png`} /></li> */}
                    <li>{postTime}</li>
                    
                </ul>

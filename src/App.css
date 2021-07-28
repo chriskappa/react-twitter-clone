@@ -147,3 +147,10 @@ button {
   margin-top: 27%;
   margin-left: 100px;
 }
+
+.userProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

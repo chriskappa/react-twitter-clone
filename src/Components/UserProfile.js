@@ -6,7 +6,7 @@ export default function UserProfile() {
     const image = `https://avatars.abstractapi.com/v1/?api_key=c0a5e53a8949487ca25697cf362b9025&name=${currentUser.email}%20`;
     console.log(currentUser.emailVerified);
     return (
-        <div>
+        <div className="userProfile">
             <div class="card" style={{width: 18+'rem'}}>
                 <img src={image} class="card-img-top" alt="..." />
                 <div class="card-body">
