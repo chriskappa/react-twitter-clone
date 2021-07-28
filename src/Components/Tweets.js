@@ -29,7 +29,8 @@ export default function Tweets({match}) {
                  <NavBar />
             </div>
             {/* <NavBar /> */}
-            <h1>{`Tweet from user ${targetEmail}`}</h1>
+            <h1 class="mt-5">{`Tweets from user ${targetEmail}`}</h1>
+          
             {
             data &&
             data.map((d, i) => (
