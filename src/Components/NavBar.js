@@ -4,7 +4,7 @@ import {Button} from 'react-bootstrap';
 export default function NavBar() {
 
     const {currentUser,logOut} = useAuth();
-
+    
     function logUserOut(){
         try{
             logOut();

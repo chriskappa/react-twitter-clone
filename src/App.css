@@ -124,3 +124,16 @@ button {
   /* object-fit: fill; */
   border-radius: 20px;
 }
+
+.verify-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.userContent:hover {
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  font-size: 20px;
+}

@@ -1,7 +1,7 @@
 import React ,{useContext,useEffect,useState} from 'react'
 import NavBar from './NavBar';
 import UserVerificationToast from './UserVerificationToast';
-import {Button,Toast,Spinner} from 'react-bootstrap';
+import {Button,Toast,Spinner,Alert} from 'react-bootstrap';
 import { auth } from '../Firebase';
 import firebase from '../Firebase';
 import {useAuth} from '../Contexts/AuthContexts';
@@ -22,11 +22,12 @@ export default function Dashboard() {
    const [post ,setPost]=useState();
    const [data , setData] = useState();
    const [fetch , setFetch]=useState(true);
-
+   const [posting , setPosting]=useState(false);
 //    Description variable
    const [description,setDescription] = useState('');
 
    const [title ,setTitle]=useState('');
+ 
 
   
     async function handleLogout(){
@@ -56,24 +57,33 @@ export default function Dashboard() {
     }
 
     function addData(){
+        setPosting(true);
         const postRef= firebase.firestore().collection("posts");
                 if(!currentUser.emailVerified ){
                     alert("Please Verify your account to have the verify badge")
                 }
-                const today = new Date();
-                postRef.add({
-                    email:currentUser.email,
-                    title:title,
-                    description:description,
-                    time:today.getTime(),
-                    verified:currentUser.emailVerified,
-                    country:localStorage.getItem('country'),
-                    avatar:`https://avatars.abstractapi.com/v1/?api_key=c0a5e53a8949487ca25697cf362b9025&name=${currentUser.email}%20`
-                })
+                else if(title.length == 0 || description.length < 20 ){
+                    alert("Please make sure to include title and minimum of 20 characters for description")
+                    setPosting(false);
+                }
+                else{
+                    const today = new Date();
+                    postRef.add({
+                        email:currentUser.email,
+                        title:title,
+                        description:description,
+                        time:today.getTime(),
+                        verified:currentUser.emailVerified,
+                        country:localStorage.getItem('country'),
+                        avatar:`https://avatars.abstractapi.com/v1/?api_key=c0a5e53a8949487ca25697cf362b9025&name=${currentUser.email}%20` || 'https://static.wixstatic.com/media/a86808_4b6288c72b6845a98503af781a4f51a0~mv2.png/v1/crop/x_0,y_13,w_350,h_323/fill/w_490,h_452,al_c,lg_1,q_85/no%20profile%20picture.webp'
+                    })
                 cleanInputs();
+                setTimeout(()=>{ setPosting(false); }, 1000);
                
                 
            
+                }
+                
         
     
     }
@@ -92,12 +102,33 @@ export default function Dashboard() {
        getData()
        console.log(data);
        console.log(dayjs().from);
+       
     },[])
 
    
+    
+    if(!currentUser.emailVerified) return (
+    
+        <>
+        <NavBar/>
+        <div className="verify-page">
+         <div class="alert alert-success" role="alert">
+         <h4 class="alert-heading">You Didnt Verify your Account </h4>
+            <p>In order to see acces the content of the site you are required to verify your email.Please check your email ({currentUser.email}) and verify your Account.In case you verified your account please refresh the page!</p>
+            <hr/>
+            <p class="mb-0">For more information please contact us on twitterclone@mysite.com</p>
+         </div>
+        
+        </div>
+           
+        </>
+        
+    );
 
-  
+    
+    
     return (
+        
         <div className="dashboard-wrapper">
             <div className="navBarWrapper">
                 <NavBar/>
@@ -106,76 +137,22 @@ export default function Dashboard() {
        <div className="post-input">
            <input type="text" value={title}placeholder="Post Title" onChange={e=>setTitle(e.target.value)}/>
            <input type="text" value={description }placeholder="Post your thoughts" onChange={e=>setDescription(e.target.value)}/>
-           <Button onClick={addData}>Post</Button>
+           <Button onClick={addData} disabled={posting}>Post</Button>
        </div>
 
-        {/* <div className="dashboardContent">
-
-               
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-                   <UserContent />
-               
-        </div> */}
 
         <div className="dashboardContent">
 
-        {data &&data.map((d,i) => <UserContent key={i}title={d.title} country={d.country} avatar={d.avatar}verified={d.verified}email={d.email} post={d.description} time={d.time}/>)}
+            {fetch?<div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>: 
+
+            data &&data.map((d,i) => <UserContent key={i}title={d.title} country={d.country} avatar={d.avatar}verified={d.verified}email={d.email} post={d.description} time={d.time}/>)}
 
         </div>
-            {/* Toast */}
-            {/* <Toast show={show} onClose={toggleShow} delay={3000} autohide>
-                    <Toast.Header>
-                            <img
-                            src="holder.js/20x20?text=%20"
-                            className="rounded me-2"
-                            alt=""
-                            />
-                            <strong className="me-auto">Sucessfuly Registered</strong>
-                            <small>2 seconds ago</small>
-                    </Toast.Header>
-                    <Toast.Body>{`${currentUser.email} Please Verify your email`}</Toast.Body>
-                </Toast> */}
-            {/* End of Toast */}
-
-        {/* <div className="dashboardContent">
-            
-            
-            <h1><span class="">Hello User</span> {currentUser.email}</h1>
-            
             
 
-            {!fetch &&  data ? data.map((data,i)=>(
-            
-                    <>
-                        <h1>{data.title}</h1>
-                        <p>{data.description}</p>
-                        <h1>{data.price}</h1>
-                    </>
-                    
-                
-                
-            )): <> <Spinner animation="border" variant="primary" class="ml 10" /> <h5>Loading....</h5></>}
-            <Button onClick={addData}>ADD</Button>
-        </div> */}
+        
         </div>
         
     )
