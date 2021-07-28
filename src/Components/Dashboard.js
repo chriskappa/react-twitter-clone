@@ -27,9 +27,8 @@ export default function Dashboard() {
 
   const [title, setTitle] = useState("");
 
-  const userEmail = currentUser.email;
-  const userName = userEmail.match(/^([^@]*)@/)[1];
 
+  
   async function handleLogout() {
     try {
       await logOut();
@@ -58,23 +57,26 @@ export default function Dashboard() {
       alert("Please make sure to not leave empty title and description ");
       setPosting(false);
     }
+    else{
+        const today = new Date();
+        postRef.add({
+          email: currentUser.email,
+          title: title,
+          description: description,
+          time: today.getTime(),
+          verified: currentUser.emailVerified,
+          country: localStorage.getItem("country"),
+          avatar:
+            `https://avatars.dicebear.com/api/male/${currentUser.email}.svg?mood[]=happy` ||
+            "https://static.wixstatic.com/media/a86808_4b6288c72b6845a98503af781a4f51a0~mv2.png/v1/crop/x_0,y_13,w_350,h_323/fill/w_490,h_452,al_c,lg_1,q_85/no%20profile%20picture.webp",
+        });
+        cleanInputs();
+        setTimeout(() => {
+          setPosting(false);
+        }, 1000);
+    }
 
-    const today = new Date();
-    postRef.add({
-      email: currentUser.email,
-      title: title,
-      description: description,
-      time: today.getTime(),
-      verified: currentUser.emailVerified,
-      country: localStorage.getItem("country"),
-      avatar:
-        `https://avatars.dicebear.com/api/male/${currentUser.email}.svg?mood[]=happy` ||
-        "https://static.wixstatic.com/media/a86808_4b6288c72b6845a98503af781a4f51a0~mv2.png/v1/crop/x_0,y_13,w_350,h_323/fill/w_490,h_452,al_c,lg_1,q_85/no%20profile%20picture.webp",
-    });
-    cleanInputs();
-    setTimeout(() => {
-      setPosting(false);
-    }, 1000);
+   
   }
 
   async function getCountry() {
