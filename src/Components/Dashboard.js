@@ -63,7 +63,8 @@ export default function Dashboard() {
                     title:title,
                     description:description,
                     time:today.getTime(),
-                    verified:currentUser.emailVerified
+                    verified:currentUser.emailVerified,
+                    country:localStorage.getItem('country')
                 })
                
                 
@@ -132,7 +133,7 @@ export default function Dashboard() {
 
         <div className="dashboardContent">
 
-        {data &&data.map((d,i) => <UserContent key={i}title={d.title} verified={d.verified}email={d.email} post={d.description} time={d.time}/>)}
+        {data &&data.map((d,i) => <UserContent key={i}title={d.title} country={d.country} verified={d.verified}email={d.email} post={d.description} time={d.time}/>)}
 
         </div>
             {/* Toast */}
