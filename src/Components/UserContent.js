@@ -3,7 +3,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import React from 'react'
 dayjs.extend(relativeTime);
 
-export default function UserContent({title,email,post,time,verified}) {
+export default function UserContent({title,email,post,time,verified,country}) {
 
     const postTime = dayjs(time).fromNow();
     const countryCode = localStorage.getItem('country');
@@ -18,7 +18,7 @@ export default function UserContent({title,email,post,time,verified}) {
                    {verified&&<li className="img-verify"><img src="https://png.pngtree.com/element_our/png/20181205/valid-vector-icon-png_260889.jpg" className="img-verify" alt="" /></li>}
                    <li>@{email}</li>
                    {/* <li>{time?time:"No Time"} ago</li> */}
-                   <li><img src={`https://www.countryflags.io/${countryCode}/flat/64.png`} /></li>
+                   <li><img src={`https://www.countryflags.io/${country}/flat/64.png`} /></li>
                    <li>{postTime}</li>
                </ul>
                <p>{post}</p>
