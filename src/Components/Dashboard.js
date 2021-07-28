@@ -108,23 +108,23 @@ export default function Dashboard() {
 
    
     
-    if(!currentUser.emailVerified) return (
+    // if(!currentUser.emailVerified) return (
     
-        <>
-        <NavBar/>
-        <div className="verify-page">
-         <div class="alert alert-success" role="alert">
-         <h4 class="alert-heading">You Didnt Verify your Account </h4>
-            <p>In order to see acces the content of the site you are required to verify your email.Please check your email ({currentUser.email}) and verify your Account.In case you verified your account please refresh the page!</p>
-            <hr/>
-            <p class="mb-0">For more information please contact us on twitterclone@mysite.com</p>
-         </div>
+    //     <>
+    //     <NavBar/>
+    //     <div className="verify-page">
+    //      <div class="alert alert-success" role="alert">
+    //      <h4 class="alert-heading">You Didnt Verify your Account </h4>
+    //         <p>In order to see acces the content of the site you are required to verify your email.Please check your email ({currentUser.email}) and verify your Account.In case you verified your account please refresh the page!</p>
+    //         <hr/>
+    //         <p class="mb-0">For more information please contact us on twitterclone@mysite.com</p>
+    //      </div>
         
-        </div>
+    //     </div>
            
-        </>
+    //     </>
         
-    );
+    // );
 
     
     
