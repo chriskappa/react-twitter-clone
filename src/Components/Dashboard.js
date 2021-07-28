@@ -50,7 +50,10 @@ export default function Dashboard() {
   
 
 
-
+    const cleanInputs= ()=>{
+        setTitle('');
+        setDescription('');
+    }
 
     function addData(){
         const postRef= firebase.firestore().collection("posts");
@@ -64,8 +67,10 @@ export default function Dashboard() {
                     description:description,
                     time:today.getTime(),
                     verified:currentUser.emailVerified,
-                    country:localStorage.getItem('country')
+                    country:localStorage.getItem('country'),
+                    avatar:`https://avatars.abstractapi.com/v1/?api_key=c0a5e53a8949487ca25697cf362b9025&name=${currentUser.email}%20`
                 })
+                cleanInputs();
                
                 
            
@@ -133,7 +138,7 @@ export default function Dashboard() {
 
         <div className="dashboardContent">
 
-        {data &&data.map((d,i) => <UserContent key={i}title={d.title} country={d.country} verified={d.verified}email={d.email} post={d.description} time={d.time}/>)}
+        {data &&data.map((d,i) => <UserContent key={i}title={d.title} country={d.country} avatar={d.avatar}verified={d.verified}email={d.email} post={d.description} time={d.time}/>)}
 
         </div>
             {/* Toast */}

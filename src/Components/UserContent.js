@@ -3,19 +3,20 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import React from 'react'
 dayjs.extend(relativeTime);
 
-export default function UserContent({title,email,post,time,verified,country}) {
+export default function UserContent({title,email,post,time,verified,country,avatar}) {
 
     const postTime = dayjs(time).fromNow();
     console.log(country);
     return (
         <div className="userContent">
-            <img className="avatar" src="https://pbs.twimg.com/profile_images/1224193692933808130/ob8r0cv__400x400.jpg" alt="" />
+            {/* <img className="avatar" src="https://pbs.twimg.com/profile_images/1224193692933808130/ob8r0cv__400x400.jpg" alt="" /> */}
+            {avatar?<img className="avatar" src={avatar} alt="" />:<img className="avatar" src="https://pbs.twimg.com/profile_images/1224193692933808130/ob8r0cv__400x400.jpg" alt="" />}
            
            <div className="userContent-title">
                <ul class="d-flex align-items-center">
                    <li><b>{title}</b></li>
                    {verified&&<li className="img-verify"><img src="https://png.pngtree.com/element_our/png/20181205/valid-vector-icon-png_260889.jpg" className="img-verify" alt="" /></li>}
-                   <li>@{email}</li>
+                   <li>{email}</li>
                    <li><img className="countryImage" src={`https://www.countryflags.io/${country}/flat/32.png`} /></li>
                    <li>{postTime}</li>
                    
