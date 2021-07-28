@@ -4,7 +4,9 @@ import {Button} from 'react-bootstrap';
 export default function NavBar() {
 
     const {currentUser,logOut} = useAuth();
-    
+    const userEmail = currentUser.email;
+    const userName = userEmail.replace(/([^.@\s]+)(\.[^.@\s]+)*@([^.@\s]+\.)+([^.@\s]+)/,"");
+    console.log(userName)
     function logUserOut(){
         try{
             logOut();
