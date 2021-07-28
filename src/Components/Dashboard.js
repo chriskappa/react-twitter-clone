@@ -125,7 +125,7 @@ export default function Dashboard() {
             data.map((d, i) => (
               <>
               {console.log(d)}
-              <Link to={`/tweets/${d.email}`}>
+              <Link to={`/tweets/${d.email}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
                 <UserContent
                   key={i}
                   title={d.title}

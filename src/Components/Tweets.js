@@ -25,7 +25,10 @@ export default function Tweets({match}) {
     
     return (
         <div className="tweet-wrapper">
-            <NavBar />
+             <div className="navBarWrapper">
+                 <NavBar />
+            </div>
+            {/* <NavBar /> */}
             <h1>{`Tweet from user ${targetEmail}`}</h1>
             {
             data &&

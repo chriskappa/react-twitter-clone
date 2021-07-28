@@ -16,7 +16,7 @@ export default function NavBar() {
   return (
     <div className="navBarItems">
       <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <a class="navbar-brand" href="#"> Navbar </a>
+        <a class="navbar-brand ml-10" href="/" > <b>Navbar </b></a>
         <button
           class="navbar-toggler"
           type="button"
