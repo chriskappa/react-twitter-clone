@@ -6,8 +6,7 @@ dayjs.extend(relativeTime);
 export default function UserContent({title,email,post,time,verified,country}) {
 
     const postTime = dayjs(time).fromNow();
-    const countryCode = localStorage.getItem('country');
-    console.log(countryCode)
+    console.log(country);
     return (
         <div className="userContent">
             <img src="https://pbs.twimg.com/profile_images/1224193692933808130/ob8r0cv__400x400.jpg" alt="" />

@@ -9,6 +9,9 @@
   margin-right: 10px;
 }
 
+.navBarItems {
+  margin-bottom: 50px;
+}
 ul,
 li {
   display: flex;
@@ -22,12 +25,6 @@ button {
   margin-right: 10px;
 }
 
-.dashBoardWrapper {
-  margin: 0;
-  padding: 0;
-  display: block;
-}
-
 .all-content-wrapper {
 }
 
@@ -36,7 +33,6 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 120vh;
 }
 .login-wrapper {
   display: flex;

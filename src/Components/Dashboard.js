@@ -95,8 +95,8 @@ export default function Dashboard() {
     return (
         <div className="dashboard-wrapper">
             <div className="navBarWrapper">
-            <NavBar/>
-        </div>
+                <NavBar/>
+            </div>
        
        <div className="post-input">
            <input type="text" value={title}placeholder="Post Title" onChange={e=>setTitle(e.target.value)}/>
