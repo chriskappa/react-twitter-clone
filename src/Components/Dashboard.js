@@ -7,6 +7,8 @@ import firebase from '../Firebase';
 import {useAuth} from '../Contexts/AuthContexts';
 import {Link, useHistory} from 'react-router-dom';
 import UserContent from './UserContent';
+import dayjs from 'dayjs';
+import axios from 'axios';
 export default function Dashboard() {
   
    const {currentUser , logOut} = useAuth();
@@ -14,7 +16,9 @@ export default function Dashboard() {
    const toggleShow = () =>setShow(!show);
    const history = useHistory();
    const ref = firebase.firestore().collection("products");
-   const postRef = firebase.firestore().collection("posts");
+   const postRef = firebase.firestore().collection("posts").orderBy("time", "desc");
+   
+
    const [post ,setPost]=useState();
    const [data , setData] = useState();
    const [fetch , setFetch]=useState(true);
@@ -23,6 +27,8 @@ export default function Dashboard() {
    const [description,setDescription] = useState('');
 
    const [title ,setTitle]=useState('');
+
+  
     async function handleLogout(){
         try{
             await logOut();
@@ -47,6 +53,7 @@ export default function Dashboard() {
 
 
     function addData(){
+        const postRef= firebase.firestore().collection("posts");
                 if(!currentUser.emailVerified ){
                     alert("Please Verify your account to have the verify badge")
                 }
@@ -55,7 +62,7 @@ export default function Dashboard() {
                     email:currentUser.email,
                     title:title,
                     description:description,
-                    time:today.getHours(),
+                    time:today.getTime(),
                     verified:currentUser.emailVerified
                 })
                
@@ -65,10 +72,20 @@ export default function Dashboard() {
     
     }
 
+
+    async function getCountry(){
+        
+        let data = await axios.get("https://api.db-ip.com/v2/free/self")
+        let result = data.data;
+        localStorage.setItem('country',result.countryCode)
+        console.log(localStorage.getItem('country'))
+    }
     useEffect(()=>{
+       getCountry();
+    //    localStorage.setItem('country',"")
        getData()
        console.log(data);
-       console.log(currentUser);
+       console.log(dayjs().from);
     },[])
 
    
