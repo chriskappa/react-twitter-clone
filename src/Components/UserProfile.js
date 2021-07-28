@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap';
 import {useAuth} from '../Contexts/AuthContexts';
 export default function UserProfile() {
     const {currentUser , logOut} = useAuth();
-    const image = `https://avatars.abstractapi.com/v1/?api_key=c0a5e53a8949487ca25697cf362b9025&name=${currentUser.email}%20`;
+    const image = `https://avatars.dicebear.com/api/male/${currentUser.email}.svg?mood[]=happy` || 'https://static.wixstatic.com/media/a86808_4b6288c72b6845a98503af781a4f51a0~mv2.png/v1/crop/x_0,y_13,w_350,h_323/fill/w_490,h_452,al_c,lg_1,q_85/no%20profile%20picture.webp'
     console.log(currentUser.emailVerified);
     return (
         <div>
