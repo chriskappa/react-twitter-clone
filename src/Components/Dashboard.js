@@ -16,10 +16,7 @@ export default function Dashboard() {
   const toggleShow = () => setShow(!show);
   const history = useHistory();
   const ref = firebase.firestore().collection("products");
-  const postRef = firebase
-    .firestore()
-    .collection("posts")
-    .orderBy("time", "desc");
+  const postRef = firebase.firestore().collection("posts").orderBy("time", "desc");
 
   const [post, setPost] = useState();
   const [data, setData] = useState();
@@ -29,6 +26,9 @@ export default function Dashboard() {
   const [description, setDescription] = useState("");
 
   const [title, setTitle] = useState("");
+
+  const userEmail = currentUser.email;
+  const userName = userEmail.match(/^([^@]*)@/)[1];
 
   async function handleLogout() {
     try {
@@ -91,24 +91,6 @@ export default function Dashboard() {
     console.log(dayjs().from);
   }, []);
 
-  // if(!currentUser.emailVerified) return (
-
-  //     <>
-  //     <NavBar/>
-  //     <div className="verify-page">
-  //      <div class="alert alert-success" role="alert">
-  //      <h4 class="alert-heading">You Didnt Verify your Account </h4>
-  //         <p>In order to see acces the content of the site you are required to verify your email.Please check your email ({currentUser.email}) and verify your Account.In case you verified your account please refresh the page!</p>
-  //         <hr/>
-  //         <p class="mb-0">For more information please contact us on twitterclone@mysite.com</p>
-  //      </div>
-
-  //     </div>
-
-  //     </>
-
-  // );
-
   return (
     <div className="dashboard-wrapper">
       <div className="navBarWrapper">
@@ -130,9 +112,7 @@ export default function Dashboard() {
               placeholder="Post your thoughts"
               onChange={(e) => setDescription(e.target.value)}
             />
-            <Button onClick={addData} disabled={posting}>
-              Post
-            </Button>
+            <Button onClick={addData} disabled={posting}> Post </Button>
           </div>
           {fetch ? (
             <div class="spinner-grow text-primary" role="status">
