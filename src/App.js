@@ -6,6 +6,7 @@ import Login from './Components/Login';
 import Dashboard from './Components/Dashboard';
 import PrivateRoute from './Components/PrivateRoute';
 import UserProfile from './Components/UserProfile';
+import Tweets from './Components/Tweets';
 import {AuthProvider} from './Contexts/AuthContexts';
 
 import {BrowserRouter as Router , Route , Switch} from 'react-router-dom';
@@ -22,6 +23,8 @@ function App() {
               <Route  exact path="/register" component={Singup}/>
               <Route  exact path="/login" component={Login}/>
               <PrivateRoute  exact path="/profile" component={UserProfile}/>
+              <PrivateRoute  exact path="/tweets/:email" component={Tweets}/>
+
             </Switch>
       
     </Router>

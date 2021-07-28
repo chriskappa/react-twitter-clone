@@ -123,16 +123,21 @@ export default function Dashboard() {
           ) : (
             data &&
             data.map((d, i) => (
-              <UserContent
-                key={i}
-                title={d.title}
-                country={d.country}
-                avatar={d.avatar}
-                verified={d.verified}
-                email={d.email}
-                post={d.description}
-                time={d.time}
-              />
+              <>
+              {console.log(d)}
+              <Link to={`/tweets/${d.email}`}>
+                <UserContent
+                  key={i}
+                  title={d.title}
+                  country={d.country}
+                  avatar={d.avatar}
+                  verified={d.verified}
+                  email={d.email?d.email:"cshostgr@yahoo.com"}
+                  post={d.description}
+                  time={d.time}
+                />
+            </Link>
+            </>
             ))
           )}
         </div>

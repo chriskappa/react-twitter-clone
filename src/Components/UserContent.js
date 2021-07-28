@@ -6,7 +6,8 @@ dayjs.extend(relativeTime);
 export default function UserContent({title,email,post,time,verified,country,avatar}) {
 
     const postTime = dayjs(time).fromNow();
-    const username = email.match(/^([^@]*)@/)[1];
+    console.log(email)
+    // const username = email.match(/^([^@]*)@/)[1];
     return (
         <div className="userContent">
             {/* <img className="avatar" src="https://pbs.twimg.com/profile_images/1224193692933808130/ob8r0cv__400x400.jpg" alt="" /> */}
@@ -15,7 +16,7 @@ export default function UserContent({title,email,post,time,verified,country,avat
            <div className="userContent-title">
                <ul class="d-flex align-items-center justify-content-between">
                    <li><b>Posted By</b></li>
-                   <li>@{username}</li>
+                   <li>{email}</li>
                    <li><img className="countryImage" src={`https://www.countryflags.io/${country}/flat/32.png`} /></li>
                    {/* <li><img className="countryImage" src={`https://www.countryflags.io/${country}/flat/32.png`} /></li> */}
                    <li>{postTime}</li>

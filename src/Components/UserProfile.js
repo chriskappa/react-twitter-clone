@@ -1,11 +1,10 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useAuth } from "../Contexts/AuthContexts";
-export default function UserProfile() {
+export default function UserProfile({match}) {
   const { currentUser, logOut } = useAuth();
-  const image =
-    `https://avatars.dicebear.com/api/male/${currentUser.email}.svg?mood[]=happy` ||
-    "https://static.wixstatic.com/media/a86808_4b6288c72b6845a98503af781a4f51a0~mv2.png/v1/crop/x_0,y_13,w_350,h_323/fill/w_490,h_452,al_c,lg_1,q_85/no%20profile%20picture.webp";
+  console.log(match)
+  const image =`https://avatars.dicebear.com/api/male/${currentUser.email}.svg?mood[]=happy` ||"https://static.wixstatic.com/media/a86808_4b6288c72b6845a98503af781a4f51a0~mv2.png/v1/crop/x_0,y_13,w_350,h_323/fill/w_490,h_452,al_c,lg_1,q_85/no%20profile%20picture.webp";
   console.log(currentUser.emailVerified);
   return (
     <div>
