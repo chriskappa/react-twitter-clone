@@ -134,6 +134,16 @@ button {
 
 .userContent:hover {
   cursor: pointer;
-  background-color: rgb(255, 255, 255);
-  font-size: 20px;
+  background-color: rgb(207, 200, 200);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.flex-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-wrapper {
+  margin-top: 27%;
+  margin-left: 100px;
 }

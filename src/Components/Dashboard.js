@@ -9,6 +9,7 @@ import {Link, useHistory} from 'react-router-dom';
 import UserContent from './UserContent';
 import dayjs from 'dayjs';
 import axios from 'axios';
+import UserProfile from './UserProfile';
 export default function Dashboard() {
   
    const {currentUser , logOut} = useAuth();
@@ -130,26 +131,30 @@ export default function Dashboard() {
     return (
         
         <div className="dashboard-wrapper">
+           
             <div className="navBarWrapper">
                 <NavBar/>
             </div>
-       
-       <div className="post-input">
-           <input type="text" value={title}placeholder="Post Title" onChange={e=>setTitle(e.target.value)}/>
-           <input type="text" value={description }placeholder="Post your thoughts" onChange={e=>setDescription(e.target.value)}/>
-           <Button onClick={addData} disabled={posting}>Post</Button>
-       </div>
 
+            <div className="flex-wrapper">
+                <div className="dashboardContent">
+                <div className="post-input">
+                    <input type="text" value={title}placeholder="Post Title" onChange={e=>setTitle(e.target.value)}/>
+                    <input type="text" value={description }placeholder="Post your thoughts" onChange={e=>setDescription(e.target.value)}/>
+                    <Button onClick={addData} disabled={posting}>Post</Button>
+                </div>
+                    {fetch?<div class="spinner-grow text-primary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>: 
 
-        <div className="dashboardContent">
+                    data &&data.map((d,i) => <UserContent key={i}title={d.title} country={d.country} avatar={d.avatar}verified={d.verified}email={d.email} post={d.description} time={d.time}/>)}
 
-            {fetch?<div class="spinner-grow text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>: 
-
-            data &&data.map((d,i) => <UserContent key={i}title={d.title} country={d.country} avatar={d.avatar}verified={d.verified}email={d.email} post={d.description} time={d.time}/>)}
-
-        </div>
+                </div>
+                <div className="profile-wrapper mr-5">
+                    <UserProfile/>
+                </div>
+            </div>
+            
             
 
         
