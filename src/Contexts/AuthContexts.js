@@ -24,15 +24,6 @@ export  function AuthProvider({children}) {
         return auth.signOut();
     }
 
-    function sendEmailVerfication(){
-        
-    }
-   
-
-    function resetPassowrd(){
-        
-    }
-
     useEffect(()=>{
        const unsubscribe = auth.onAuthStateChanged(user =>{
             setCurrentUser(user);

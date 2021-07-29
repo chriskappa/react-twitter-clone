@@ -1,20 +1,20 @@
-import React,{useState,useEfeect} from  'react'
+import React,{useState} from  'react'
 import { useAuth} from '../Contexts/AuthContexts';
-import {Toast,Alert,Spinner,Button} from 'react-bootstrap'
+import {Toast,Alert,Button} from 'react-bootstrap'
 import {Link,useHistory} from 'react-router-dom';
 import { auth } from '../Firebase';
 function Login() {
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState('');
-    const [passwordConfirmation ,setPassowrdConfirmation] = useState('')
+    // const [passwordConfirmation ,setPassowrdConfirmation] = useState('')
     const [loading , setLoading]=useState(false);
     const [error , setError]=useState('');
-    const {signUp , currentUser,testFunction} = useAuth();
+    const {loginUser} = useAuth();
     const [show , setShow] =useState(false);
     const toggleShow = ()=>{setShow(!show)};
     const history = useHistory();
 
-    const {loginUser} = useAuth();
+   
    async  function handleSubmit(e){
         e.preventDefault();
         setError('');
@@ -27,10 +27,7 @@ function Login() {
                 history.push("/")
             }
             catch(err){
-                // console.log(err)
-                // alert(err.message)
                 setError(err.message);
-                // alert(err);
             }
             setLoading(false);
             
@@ -41,8 +38,6 @@ function Login() {
 
     function resetPassowrd(){
         const userEmail = prompt("Please Enter Your Email");
-        alert(userEmail)
-        const user = auth.currentUser;
         auth.sendPasswordResetEmail(userEmail)
         .then(alert("Please Check your Email"))
         .catch(err =>{
@@ -50,9 +45,13 @@ function Login() {
         })
     }
 
-    {loading && <Spinner animation="border" role="status">
-    <span className="visually-hidden">Loading...</span>
-  </Spinner>}
+    if(loading) return(
+        <div className="spinner-wrapper center">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    )
 
     return (
             <div className="login-wrapper">

@@ -3,9 +3,10 @@ import { useAuth } from "../Contexts/AuthContexts";
 import { Button } from "react-bootstrap";
 export default function NavBar() {
   const { currentUser, logOut } = useAuth();
+
   const userEmail = currentUser.email;
   const userName = userEmail.match(/^([^@]*)@/)[1];
-  console.log("here",userEmail,userName);
+
   function logUserOut() {
     try {
       logOut();
@@ -16,7 +17,7 @@ export default function NavBar() {
   return (
     <div className="navBarItems">
       <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <a class="navbar-brand ml-10" href="/" > <b>Navbar </b></a>
+        <a class="navbar-brand " href="/" > <b>Navbar </b></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -36,12 +37,12 @@ export default function NavBar() {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="/">
                 Features
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="/">
                 Pricing
               </a>
             </li>

@@ -1,26 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
-import UserVerificationToast from "./UserVerificationToast";
-import { Button, Toast, Spinner, Alert } from "react-bootstrap";
-import { auth } from "../Firebase";
+// import UserVerificationToast from "./UserVerificationToast";
+import { Button} from "react-bootstrap";
+// import { auth } from "../Firebase";
 import firebase from "../Firebase";
 import { useAuth } from "../Contexts/AuthContexts";
-import { Link, useHistory } from "react-router-dom";
+import { Link} from "react-router-dom";
 import UserContent from "./UserContent";
-import dayjs from "dayjs";
+// import dayjs from "dayjs";
 import axios from "axios";
 import UserProfile from "./UserProfile";
 export default function Dashboard() {
-  const { currentUser, logOut } = useAuth();
-  const [show, setShow] = useState(true);
-  const toggleShow = () => setShow(!show);
-  const history = useHistory();
-  const ref = firebase.firestore().collection("products");
+  const { currentUser } = useAuth();
+  // const [show, setShow] = useState(true);
+  // const ref = firebase.firestore().collection("products");
   const postRef = firebase.firestore().collection("posts").orderBy("time", "desc");
+  // const postRef = firebase.firestore().collection("posts");
 
-  const [post, setPost] = useState();
+  // const [post, setPost] = useState();
   const [data, setData] = useState();
-  const [fetch, setFetch] = useState(true);
+
   const [posting, setPosting] = useState(false);
   //    Description variable
   const [description, setDescription] = useState("");
@@ -29,22 +28,16 @@ export default function Dashboard() {
   const [loading,setLoading]=useState(true);
 
   
-  async function handleLogout() {
-    try {
-      await logOut();
-      history.push("/login");
-    } catch (err) {
-      alert(err);
-    }
-  }
+  
 
   function getData() {
     postRef.onSnapshot((snapshot) => {
       setData(snapshot.docs.map((doc) => doc.data()));
     });
-    setFetch(false);
     setLoading(false);
   }
+
+  
 
   const cleanInputs = () => {
     setTitle("");
@@ -54,7 +47,7 @@ export default function Dashboard() {
   function addData() {
     setPosting(true);
     const postRef = firebase.firestore().collection("posts");
-    if (title.length == 0 || description.length == 0) {
+    if (title.length === 0 || description.length === 0) {
       alert("Please make sure to not leave empty title and description ");
       setPosting(false);
     }
@@ -67,9 +60,7 @@ export default function Dashboard() {
           time: today.getTime(),
           verified: currentUser.emailVerified,
           country: localStorage.getItem("country"),
-          avatar:
-            `https://avatars.dicebear.com/api/male/${currentUser.email}.svg?mood[]=happy` ||
-            "https://static.wixstatic.com/media/a86808_4b6288c72b6845a98503af781a4f51a0~mv2.png/v1/crop/x_0,y_13,w_350,h_323/fill/w_490,h_452,al_c,lg_1,q_85/no%20profile%20picture.webp",
+          avatar:`https://avatars.dicebear.com/api/male/${currentUser.email}.svg?mood[]=happy` || "https://static.wixstatic.com/media/a86808_4b6288c72b6845a98503af781a4f51a0~mv2.png/v1/crop/x_0,y_13,w_350,h_323/fill/w_490,h_452,al_c,lg_1,q_85/no%20profile%20picture.webp",
         });
         cleanInputs();
         setTimeout(() => {
@@ -84,16 +75,26 @@ export default function Dashboard() {
     let data = await axios.get("https://api.db-ip.com/v2/free/self");
     let result = data.data;
     localStorage.setItem("country", result.countryCode);
-    console.log(localStorage.getItem("country"));
+    
   }
+
+
+
+  
   useEffect(() => {
     getCountry();
-    //    localStorage.setItem('country',"")
     getData();
-    console.log(data);
-    console.log(dayjs().from);
+   
   }, []);
 
+
+  if(loading) return(
+    <div className="spinner-wrapper center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+)
 
 
   return (
@@ -127,7 +128,7 @@ export default function Dashboard() {
             data &&
             data.map((d, i) => (
               <>
-              {console.log(d)}
+              
               <Link to={`/tweets/${d.email}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
                 <UserContent
                   key={i}
@@ -148,6 +149,9 @@ export default function Dashboard() {
           <UserProfile />
         </div>
       </div>
+
+      
+             
     </div>
   );
 }

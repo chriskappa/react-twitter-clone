@@ -1,4 +1,4 @@
-import React,{useState,useEfeect} from  'react'
+import React,{useState} from  'react'
 import { useAuth} from '../Contexts/AuthContexts';
 import {Toast,Alert} from 'react-bootstrap'
 import {Link,useHistory} from 'react-router-dom';
@@ -9,14 +9,14 @@ function Singup() {
     const [passwordConfirmation ,setPassowrdConfirmation] = useState('')
     const [loading , setLoading]=useState(false);
     const [error , setError]=useState('');
-    const {signUp , currentUser} = useAuth();
+    const {signUp} = useAuth();
     const [show , setShow] =useState(false);
     const toggleShow = ()=>{setShow(!show)};
     const history = useHistory();
 
     async function handleSubmit(e){
         e.preventDefault();
-        if(password != passwordConfirmation){
+        if(password !== passwordConfirmation){
             setError("Please enter same password in both fields")
             // 
         }
@@ -46,11 +46,7 @@ function Singup() {
         
     }
 
-    function resetPassword(){
-        auth.sendPasswordResetEmail(email)
-        .then(<h1>Please Check your Email</h1>)
-
-    }
+ 
 
     function sendEmailVerification(){
         const user = auth.currentUser;
@@ -59,6 +55,15 @@ function Singup() {
             alert(err);
         })
     }
+
+    if(loading) return(
+        <div className="spinner-wrapper center">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    )
+
     return (
       
         <div className="signup-wrapper">

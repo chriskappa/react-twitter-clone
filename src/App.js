@@ -1,6 +1,6 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import {Button ,Form , Alert , Container,Badge} from 'react-bootstrap';
+// import {Button ,Form , Alert , Container,Badge} from 'react-bootstrap';
 import Singup from './Components/Singup';
 import Login from './Components/Login';
 import Dashboard from './Components/Dashboard';

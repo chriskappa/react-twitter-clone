@@ -6,18 +6,18 @@ dayjs.extend(relativeTime);
 export default function UserContent({title,email,post,time,verified,country,avatar}) {
 
     const postTime = dayjs(time).fromNow();
-    console.log(email)
-    // const username = email.match(/^([^@]*)@/)[1];
+    const username = email.match(/^([^@]*)@/)[1]; // Replacing @EmailHosting.com in order to create username and hide the email!
+
     return (
         <div className="userContent">
             {/* <img className="avatar" src="https://pbs.twimg.com/profile_images/1224193692933808130/ob8r0cv__400x400.jpg" alt="" /> */}
-            {avatar?<img className="avatar" src={avatar} alt="" />:<img className="avatar" src="https://pbs.twimg.com/profile_images/1224193692933808130/ob8r0cv__400x400.jpg" alt="" />}
+            {avatar?<img className="avatar" src={avatar} alt="User Avatar" />:<img className="avatar" src="https://pbs.twimg.com/profile_images/1224193692933808130/ob8r0cv__400x400.jpg" alt="User Avatar" />}
            
            <div className="userContent-title">
                <ul class="d-flex align-items-center justify-content-between">
-                   <li><b>Posted By</b></li>
-                   <li>{email}</li>
-                   <li><img className="countryImage" src={`https://www.countryflags.io/${country}/flat/32.png`} /></li>
+                   <li>Posted By</li>
+                   <li>User::<b>@{username}</b></li>
+                   <li><img className="countryImage" src={`https://www.countryflags.io/${country}/flat/32.png`} alt="User Country Flag" /></li>
                    {/* <li><img className="countryImage" src={`https://www.countryflags.io/${country}/flat/32.png`} /></li> */}
                    <li>{postTime}</li>
                    
