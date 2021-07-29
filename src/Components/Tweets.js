@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import UserContent from './UserContent'
 import firebase from 'firebase';
 import NavBar from './NavBar';
+import Footer from './Footer';
 export default function Tweets({match}) {
 
     const ref =firebase.firestore().collection("posts").orderBy("time", "desc");
@@ -61,7 +62,7 @@ export default function Tweets({match}) {
           
             ))
 }   
-            
+            <Footer />
         </div>
     )
 }

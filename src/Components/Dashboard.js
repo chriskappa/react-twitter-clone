@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
-// import UserVerificationToast from "./UserVerificationToast";
 import { Button} from "react-bootstrap";
-// import { auth } from "../Firebase";
 import firebase from "../Firebase";
 import { useAuth } from "../Contexts/AuthContexts";
 import { Link} from "react-router-dom";
 import UserContent from "./UserContent";
-// import dayjs from "dayjs";
 import axios from "axios";
 import UserProfile from "./UserProfile";
+import Footer from './Footer';
 export default function Dashboard() {
   const { currentUser } = useAuth();
   const [number ,setNumber]=useState(10);
@@ -143,7 +141,7 @@ export default function Dashboard() {
                   country={d.country}
                   avatar={d.avatar}
                   verified={d.verified}
-                  email={d.email?d.email:"cshostgr@yahoo.com"}
+                  email={d.email}
                   post={d.description}
                   time={d.time}
                 />
@@ -162,7 +160,7 @@ export default function Dashboard() {
       </div>
 
       
-             
+            <Footer/> 
     </div>
   );
 }

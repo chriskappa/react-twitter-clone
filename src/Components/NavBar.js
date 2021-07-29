@@ -17,7 +17,7 @@ export default function NavBar() {
   return (
     <div className="navBarItems">
       <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <a class="navbar-brand " href="/" > <b>Navbar </b></a>
+        <a class="navbar-brand " href="/" > <b>Christos Twitter Clone </b></a>
         <button
           class="navbar-toggler"
           type="button"
