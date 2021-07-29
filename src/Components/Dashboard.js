@@ -26,7 +26,7 @@ export default function Dashboard() {
   const [description, setDescription] = useState("");
 
   const [title, setTitle] = useState("");
-
+  const [loading,setLoading]=useState(true);
 
   
   async function handleLogout() {
@@ -43,6 +43,7 @@ export default function Dashboard() {
       setData(snapshot.docs.map((doc) => doc.data()));
     });
     setFetch(false);
+    setLoading(false);
   }
 
   const cleanInputs = () => {
@@ -93,6 +94,8 @@ export default function Dashboard() {
     console.log(dayjs().from);
   }, []);
 
+
+
   return (
     <div className="dashboard-wrapper">
       <div className="navBarWrapper">
@@ -116,7 +119,7 @@ export default function Dashboard() {
             />
             <Button onClick={addData} disabled={posting}> Post </Button>
           </div>
-          {fetch ? (
+          {loading ? (
             <div class="spinner-grow text-primary" role="status">
               <span class="sr-only">Loading...</span>
             </div>

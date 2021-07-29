@@ -177,3 +177,15 @@ button {
 .navbar-brand {
   margin-left:20px;
 }
+.tweets-alert{
+  width:37%;
+  margin-top: 4%;
+}
+
+.center{
+  height:100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
