@@ -12,7 +12,7 @@ import axios from "axios";
 import UserProfile from "./UserProfile";
 export default function Dashboard() {
   const { currentUser } = useAuth();
-  const [number ,setNumber]=useState(2);
+  const [number ,setNumber]=useState(10);
   // const [show, setShow] = useState(true);
   // const ref = firebase.firestore().collection("products");
   const postRef = firebase.firestore().collection("posts").orderBy("time", "desc").limit(number);
