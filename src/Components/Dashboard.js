@@ -12,9 +12,10 @@ import axios from "axios";
 import UserProfile from "./UserProfile";
 export default function Dashboard() {
   const { currentUser } = useAuth();
+  const [number ,setNumber]=useState(2);
   // const [show, setShow] = useState(true);
   // const ref = firebase.firestore().collection("products");
-  const postRef = firebase.firestore().collection("posts").orderBy("time", "desc");
+  const postRef = firebase.firestore().collection("posts").orderBy("time", "desc").limit(number);
   // const postRef = firebase.firestore().collection("posts");
 
   // const [post, setPost] = useState();
@@ -79,13 +80,19 @@ export default function Dashboard() {
   }
 
 
+  function fetchMoreData(){
+    // if(number+2 <= data.length){}
+    console.log(number,data.length)
+    // setNumber(val => val + 2);
+    setNumber(number + 2);
+  }
 
   
   useEffect(() => {
     getCountry();
     getData();
    
-  }, []);
+  }, [number]);
 
 
   if(loading) return(
@@ -144,10 +151,14 @@ export default function Dashboard() {
             </>
             ))
           )}
+          {/* <Button class="w-100 "  size="lg" onClick={()=>{ setNumber(val => val + 2)}}>Fetch More Data</Button> */}
+          <button type="button" class="btn btn-primary btn-lg btn-block w-100 mt-1" onClick={fetchMoreData}>Load More Tweets</button>
+          {/* <Button class="w-100 "  size="lg" onClick={()=>{ setNumber(val => val + 2)}}>Fetch More Data</Button> */}
         </div>
         <div className="profile mr-5">
           <UserProfile />
         </div>
+        
       </div>
 
       

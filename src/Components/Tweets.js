@@ -18,7 +18,7 @@ export default function Tweets({match}) {
         })
         .catch(err =>{console.log(err)})
     }
-    
+
     useEffect(()=>{
         getData()
     },[])
